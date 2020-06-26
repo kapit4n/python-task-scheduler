@@ -10,7 +10,7 @@ POST http://localhost:8000/api-auth/login
 ## resources
 ```
 {
-    "projects": "http://localhost:8000/projects/",
+    "tasks": "http://localhost:8000/tasks/",
 }
 ```
 ## create new user
