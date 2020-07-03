@@ -33,6 +33,6 @@ docker-compose up
 - ```docker-compose run app python manage.py makemigrations```
 - ```docker-compose run app python manage.py migrate```
 ## packages
-- /djangorestframework-simplejwt, conda install -c conda-forge djangorestframework_simplejwt
+- `djangorestframework-simplejwt`, `conda install -c conda-forge djangorestframework_simplejwt`
 - 
 - 
