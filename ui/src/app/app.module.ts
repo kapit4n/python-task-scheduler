@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
-import { ClientModule } from './client/client.module';
+import { UserModule } from './user/user.module';
 
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TasksComponent } from './svc/tasks/tasks.component';
@@ -17,7 +17,7 @@ import { TasksComponent } from './svc/tasks/tasks.component';
     TasksComponent
   ],
   imports: [
-    ClientModule,
+    UserModule,
     BrowserModule,
     MaterialModule,
     AppRoutingModule,

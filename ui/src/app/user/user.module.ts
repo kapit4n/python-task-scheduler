@@ -11,4 +11,4 @@ import { RegisterComponent } from './register/register.component';
   ],
   exports: [RegisterComponent]
 })
-export class ClientModule { }
+export class UserModule { }
