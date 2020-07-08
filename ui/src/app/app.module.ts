@@ -7,10 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
 import { ClientModule } from './client/client.module';
 
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { TasksComponent } from './svc/tasks/tasks.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent,
+    TasksComponent
   ],
   imports: [
     ClientModule,
