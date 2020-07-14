@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'project-one';
+  title = 'Task Manager';
+
+  constructor(
+    private authService: AuthService,
+  ) {
+  }
+
+  get isAuthenticated(): boolean {
+    return this.authService.checkAuthenticated();
+  }
+
+  logout() {
+    this.authService.signOut();
+  }
+
 }

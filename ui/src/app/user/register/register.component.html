@@ -1,0 +1,62 @@
+<mat-card tabindex="0">
+    <mat-card-content>
+        <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+            <h2>Sign Up</h2>
+            <mat-form-field class="full-width-input">
+                <input matInput placeholder="Name" formControlName="name" required>
+                <mat-error>
+                    Please enter your name
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width-input">
+                <input matInput placeholder="Surname" formControlName="surname" required>
+                <mat-error>
+                    Please enter your surname
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width-input">
+                <input matInput placeholder="Email" formControlName="email" required>
+                <div *ngIf="form.email.errors">
+                    <mat-error *ngIf="form.email.errors.required">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="form.email.errors.email">
+                        Please enter a valid email address
+                    </mat-error>
+                </div>
+            </mat-form-field>
+            <mat-form-field class="full-width-input">
+                <input matInput type="password" placeholder="Password" formControlName="password" required minlength="8">
+                <div *ngIf="form.password.errors">
+                    <mat-error *ngIf="form.password.errors.required">
+                        Password is ruquired
+                    </mat-error>
+                    <mat-error *ngIf="form.password.errors.minlength">
+                        Password must be at least 8 characters
+                    </mat-error>
+                </div>
+            </mat-form-field>
+            <mat-form-field class="full-width-input">
+                <input matInput type="password" placeholder="Confirm password" formControlName="confirmPassword" required minlength="8">
+                <div *ngIf="form.confirmPassword.errors">
+                    <mat-error *ngIf="form.confirmPassword.errors.required">
+                        Confirm Password is required
+                    </mat-error>
+                    <mat-error *ngIf="form.confirmPassword.errors.mustMatchPasswords">
+                        Passwords must match
+                    </mat-error>
+                </div>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary">Sign Up</button>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <div>
+            <span>
+                Do you already have an account?
+                <a mat-button (click)="signIn()">Login!</a>
+            </span>
+        </div>
+    </mat-card-actions>
+</mat-card>
