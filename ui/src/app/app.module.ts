@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TasksComponent } from './svc/tasks/tasks.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { TasksComponent } from './svc/tasks/tasks.component';
     BrowserModule,
     MaterialModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
   ],
   providers: [],
