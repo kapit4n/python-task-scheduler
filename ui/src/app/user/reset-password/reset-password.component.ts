@@ -13,7 +13,13 @@ export class ResetPasswordComponent implements OnInit {
     Validators.required,
     Validators.email,
   ])
+
   constructor() { }
+
+  onSubmit() {
+    console.log("Call here service to reset password");
+
+  }
 
   ngOnInit(): void {
   }
