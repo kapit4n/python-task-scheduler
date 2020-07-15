@@ -1,5 +1,6 @@
 from django.urls import include, path
 from rest_framework import routers
+from .views import CreateUserView
 from . import views
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -9,6 +10,7 @@ from rest_framework_simplejwt.views import (
 
 router = routers.DefaultRouter()
 router.register(r'tasks', views.TaskViewSet)
+router.register(r'users', CreateUserView)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
