@@ -24,7 +24,8 @@ docker-compose up
 ```
 {
     "tasks": "http://localhost:8000/tasks/",
-    "http://localhost:8000/api/token/"
+    "http://localhost:8000/api/token/",
+    "http://localhost:8000/users/"
 }
 ```
 ## create new user

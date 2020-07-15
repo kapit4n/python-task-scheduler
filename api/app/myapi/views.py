@@ -1,10 +1,15 @@
+from .models import Task
+from .serializers import TaskSerializer, ResetPasswordEmailRequestSerializer, UserSerializer
 from django.shortcuts import render
 from rest_framework import viewsets, generics
 
-from .serializers import TaskSerializer, ResetPasswordEmailRequestSerializer
 
-from .models import Task
 from rest_framework.permissions import IsAuthenticated
+
+from rest_framework.viewsets import GenericViewSet
+from rest_framework.mixins import CreateModelMixin
+from django.contrib.auth import get_user_model
+
 
 # Create your views here.
 
@@ -18,3 +23,6 @@ class RequestPasswordResetView(generics.GenericAPIView):
     def post(self, request):
         serializer=self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
+class CreateUserView(CreateModelMixin, GenericViewSet):
+    queryset = get_user_model().objects.all()
+    serializer_class = UserSerializer

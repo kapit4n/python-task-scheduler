@@ -5,6 +5,9 @@ from .models import Task
 from .models import User
 
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.contrib.auth import get_user_model
+
+UserModel = get_user_model()
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
 
@@ -24,6 +27,24 @@ class ResetPasswordEmailRequestSerializer(serializers.Serializer):
             if User.objects.filter(email=email).exists():
                 pass
             return attrs
-        except expression as indentifier:
+        except expression:
             pass
         return super().validate(attrs)
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    password = serializers.CharField(write_only=True)
+
+    def create(self, validated_data):
+        user = UserModel.objects.create_user(
+            username=validated_data['username'],
+            password=validated_data['password'],
+            email=validated_data['email'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+        )
+        return user
+
+    class Meta:
+        model = UserModel
+        fields = ('password','email', 'username', 'first_name', 'last_name',)
+
