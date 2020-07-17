@@ -2,12 +2,12 @@
 from rest_framework import serializers
 
 from .models import Task
-from .models import User
 
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import get_user_model
 
 UserModel = get_user_model()
+
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
 
@@ -20,16 +20,6 @@ class ResetPasswordEmailRequestSerializer(serializers.Serializer):
 
     class Meta:
         fields = ['email']
-
-    def validate(self, attrs):
-        try:
-            email = attrs.get('email', '')
-            if User.objects.filter(email=email).exists():
-                pass
-            return attrs
-        except expression:
-            pass
-        return super().validate(attrs)
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     password = serializers.CharField(write_only=True)
