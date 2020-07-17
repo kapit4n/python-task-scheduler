@@ -24,7 +24,7 @@ export class UsersService {
     private http: HttpClient,
   ) { }
 
-  public requestChangePassword(req: PasswordResetRequest) {
+  public requestChangePasswordEmail(req: PasswordResetRequest) {
     return this.http.post('http://localhost:8000/api/request-reset-email/', req);
   }
 
@@ -33,7 +33,7 @@ export class UsersService {
   }
 
   public changePasswordComplete(passwordInfo: PasswordCompleteReq) {
-    return this.http.patch('http://localhost:8000/api/request-reset-complete', passwordInfo)
+    return this.http.patch('http://localhost:8000/api/password-reset-complete', passwordInfo)
   }
 
 }
