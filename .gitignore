@@ -1,0 +1,4 @@
+/env
+/api/app/*.sqlite3
+/api/**/*.sqlite3
+*.sqlite3
