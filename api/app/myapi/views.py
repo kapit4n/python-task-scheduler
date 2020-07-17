@@ -1,12 +1,12 @@
 from .models import Task
-from .serializers import TaskSerializer, UserSerializer, ResetPasswordEmailRequestSerializer
+from .serializers import TaskSerializer, UserSerializer, ResetPasswordEmailRequestSerializer, SetNewPasswordSerializer
 from django.shortcuts import render
 from rest_framework import viewsets, generics, status
 
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.utils.encoding import smart_bytes
+from django.utils.encoding import smart_bytes, smart_str, DjangoUnicodeDecodeError
 
 from django.contrib.sites.shortcuts import get_current_site
 
@@ -59,3 +59,21 @@ class RequestPasswordResetEmail(generics.GenericAPIView):
 class CreateUserView(CreateModelMixin, GenericViewSet):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
+
+
+class PasswordTokenCheckAPI(generics.GenericAPIView):
+    serializer_class = SetNewPasswordSerializer
+
+    def get(self, request, uidb64, token):
+
+        try:
+            id = smart_str(urlsafe_base64_decode(uidb64))
+            user = UserModel.objects.get(id=id)
+
+            if not PasswordResetTokenGenerator().check_token(user, token):
+                return Response({'error': 'Token invalid'}, status=status.HTTP_401_UNAUTHORIZED)
+
+            return Response({'success': True, 'message': 'Credentials Valid', 'uidb64': uidb64, 'token': token}, status=status.HTTP_200_OK)
+        except DjangoUnicodeDecodeError as indentifier:
+            if not PasswordResetTokenGenerator().check_token(user):
+                return Response({'error': 'Token is not valid, please request a new one'}, status=status.HTTP_401_UNAUTHORIZED)
