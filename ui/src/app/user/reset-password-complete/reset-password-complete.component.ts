@@ -4,6 +4,11 @@ import { FormControl, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/shared/services/users.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
+interface IChangePasswordRequest {
+  token: string;
+  uidb64: string;
+}
+
 @Component({
   selector: 'app-reset-password-complete',
   templateUrl: './reset-password-complete.component.html',
@@ -32,8 +37,7 @@ export class ResetPasswordCompleteComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.url = params['url'];
-      this.usrSvc.changePasswordRequest(this.url).subscribe(res => {
-        console.log(res);
+      this.usrSvc.changePasswordRequest(this.url).subscribe((res: IChangePasswordRequest) => {
         this.token = res.token;
         this.uidb64 = res.uidb64;
       })
