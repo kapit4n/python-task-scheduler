@@ -17,8 +17,7 @@ export class ResetPasswordComponent implements OnInit {
   constructor(private usrSvc: UsersService) { }
 
   onSubmit() {
-    console.log("Call here service to reset password");
-    this.usrSvc.requestChangePasswordEmail({ email: 'luis.arce22@gmail.com' }).subscribe(x => console.log(x));
+    this.usrSvc.requestChangePasswordEmail({ email: this.emailFormControl.value }).subscribe(x => console.log(x));
   }
 
   ngOnInit(): void {

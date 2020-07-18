@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/shared/services/users.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { MustMatch } from './password-match.validator';
 
 interface IChangePasswordRequest {
   token: string;
@@ -16,25 +17,40 @@ interface IChangePasswordRequest {
 })
 export class ResetPasswordCompleteComponent implements OnInit {
   token = '';
-  password = 'admin02.,';
   uidb64 = '';
   url = '';
+  submitted = false;
 
+  changePasswordForm: FormGroup;
 
-  passwordFormControl = new FormControl('', [
-    Validators.required,
-  ])
-
-  constructor(private usrSvc: UsersService, private route: ActivatedRoute) { }
+  constructor(private usrSvc: UsersService, private route: ActivatedRoute, private formBuilder: FormBuilder, private router: Router) { }
 
   onSubmit() {
-    console.log("Call here service to reset password");
-    const r = { token: this.token, password: this.password, uidb64: this.uidb64 };
+    this.submitted = true;
+
+    if (this.changePasswordForm.invalid) {
+      return;
+    }
+
+    const r = { token: this.token, password: this.changePasswordForm.value.password, uidb64: this.uidb64 };
     console.log(r);
-    this.usrSvc.changePasswordComplete(r).subscribe(x => console.log(x));
+    this.usrSvc.changePasswordComplete(r).subscribe(x => {
+      this.router.navigate(['/login']);
+    }, error => {
+      console.error(error);
+      alert(error.message);
+    });
   }
 
   ngOnInit(): void {
+
+    this.changePasswordForm = this.formBuilder.group({
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    }, {
+      validator: MustMatch('password', 'confirmPassword')
+    })
+
     this.route.queryParams.subscribe(params => {
       this.url = params['url'];
       this.usrSvc.changePasswordRequest(this.url).subscribe((res: IChangePasswordRequest) => {
@@ -42,6 +58,10 @@ export class ResetPasswordCompleteComponent implements OnInit {
         this.uidb64 = res.uidb64;
       })
     })
+  }
+
+  get f() {
+    return this.changePasswordForm.controls;
   }
 
 }
