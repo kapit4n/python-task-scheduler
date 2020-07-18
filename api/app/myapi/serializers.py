@@ -16,8 +16,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     password = serializers.CharField(write_only=True)
 
     def create(self, validated_data):
+        ##validated_data['username']
         user = UserModel.objects.create_user(
-            username=validated_data['username'],
+            username=validated_data['email'],
             password=validated_data['password'],
             email=validated_data['email'],
             first_name=validated_data['first_name'],
@@ -27,5 +28,5 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = UserModel
-        fields = ('password','email', 'username', 'first_name', 'last_name',)
+        fields = ('email','password', 'first_name', 'last_name',)
 
