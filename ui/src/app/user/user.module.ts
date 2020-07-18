@@ -4,14 +4,21 @@ import { RegisterComponent } from './register/register.component';
 import { SigInComponent } from './sig-in/sig-in.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material/material.module';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ResetPasswordCompleteComponent } from './reset-password-complete/reset-password-complete.component';
 
 @NgModule({
-  declarations: [RegisterComponent, SigInComponent],
+  declarations: [
+    RegisterComponent,
+    SigInComponent,
+    ResetPasswordComponent,
+    ResetPasswordCompleteComponent,
+  ],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
   ],
-  exports: [RegisterComponent]
+  exports: [RegisterComponent, ResetPasswordComponent, ResetPasswordCompleteComponent]
 })
 export class UserModule { }
