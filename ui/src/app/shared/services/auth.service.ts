@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseUrl } from '../base-url';
 
 @Injectable({
@@ -28,8 +28,7 @@ export class AuthService {
   }
 
   signUp(user: User): Observable<User> {
-    console.log(JSON.stringify(user));
-    return this.http.post<User>(`${BaseUrl}/users`, user);
+    return this.http.post<User>(`${BaseUrl}users/`, user);
   }
 
   signOut() {

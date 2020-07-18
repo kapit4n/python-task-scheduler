@@ -10,6 +10,7 @@ import { UserModule } from './user/user.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TasksComponent } from './svc/tasks/tasks.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     AppRoutingModule,
     HttpClientModule,
+    FlexLayoutModule,
     BrowserAnimationsModule,
   ],
   providers: [],
