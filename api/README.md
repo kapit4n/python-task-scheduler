@@ -36,5 +36,5 @@ docker-compose up
 - ```docker-compose run app python manage.py migrate```
 ## packages
 - `djangorestframework-simplejwt`, `conda install -c conda-forge djangorestframework_simplejwt`
-- 
+- `conda install -c conda-forge django-cors-headers`
 - 
