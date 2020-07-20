@@ -3,19 +3,19 @@
         <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
             <h2>Sign Up</h2>
             <mat-form-field class="full-width-input">
-                <input matInput placeholder="Name" formControlName="name" required>
+                <input matInput placeholder="Name" formControlName="firstName" required autocomplete="off">
                 <mat-error>
                     Please enter your name
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="full-width-input">
-                <input matInput placeholder="Surname" formControlName="surname" required>
+                <input matInput placeholder="Last Name" formControlName="lastName" required autocomplete="off">
                 <mat-error>
-                    Please enter your surname
+                    Please enter your last name
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="full-width-input">
-                <input matInput placeholder="Email" formControlName="email" required>
+                <input matInput placeholder="Email" formControlName="email" required autocomplete="off">
                 <div *ngIf="form.email.errors">
                     <mat-error *ngIf="form.email.errors.required">
                         Email is required
@@ -24,6 +24,12 @@
                         Please enter a valid email address
                     </mat-error>
                 </div>
+            </mat-form-field>
+            <mat-form-field class="full-width-input">
+                <input matInput placeholder="Username" formControlName="username" required autocomplete="off">
+                <mat-error>
+                    Username is required
+                </mat-error>
             </mat-form-field>
             <mat-form-field class="full-width-input">
                 <input matInput type="password" placeholder="Password" formControlName="password" required minlength="8">

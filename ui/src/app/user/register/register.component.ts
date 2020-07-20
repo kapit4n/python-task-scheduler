@@ -22,9 +22,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.signUpForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      surname: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
     }, {
@@ -40,12 +41,14 @@ export class RegisterComponent implements OnInit {
         const user: User = {
           email: this.signUpForm.get('email').value,
           password: this.signUpForm.get('password').value,
-          name: this.signUpForm.get('name').value,
-          surname: this.signUpForm.get('surname').value
+          first_name: this.signUpForm.get('firstName').value,
+          last_name: this.signUpForm.get('lastName').value,
+          username: this.signUpForm.get('username').value,
         };
         this.authService.signUp(user)
           .subscribe((resp: User) => {
             if (resp) {
+              console.log('returned user: ', JSON.stringify(resp));
               this.authService.setUserData(resp);
             }
           });
