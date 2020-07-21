@@ -46,7 +46,7 @@ export class ResetPasswordCompleteComponent implements OnInit {
 
     this.changePasswordForm = this.formBuilder.group({
       password: ['', {validators: [Validators.required], updateOn: "blur"}],
-      confirmPassword: ['', {validators: [Validators.required], updateOn: "blur"],
+      confirmPassword: ['', {validators: [Validators.required], updateOn: "blur"}]
     }, {
       validator: MustMatch('password', 'confirmPassword')
     })
