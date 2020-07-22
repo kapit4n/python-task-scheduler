@@ -33,7 +33,7 @@ export class ResetPasswordCompleteComponent implements OnInit {
     }
 
     const r = { token: this.token, password: this.changePasswordForm.value.password, uidb64: this.uidb64 };
-    console.log(r);
+ 
     this.usrSvc.changePasswordComplete(r).subscribe(x => {
       this.router.navigate(['/login']);
     }, error => {
@@ -45,8 +45,8 @@ export class ResetPasswordCompleteComponent implements OnInit {
   ngOnInit(): void {
 
     this.changePasswordForm = this.formBuilder.group({
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
+      password: ['', {validators: [Validators.required], updateOn: "blur"}],
+      confirmPassword: ['', {validators: [Validators.required], updateOn: "blur"}]
     }, {
       validator: MustMatch('password', 'confirmPassword')
     })
