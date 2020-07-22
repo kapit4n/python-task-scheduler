@@ -3,14 +3,29 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './shared/material/material.module';
+import { UserModule } from './user/user.module';
+
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { TasksComponent } from './svc/tasks/tasks.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent,
+    TasksComponent
   ],
   imports: [
+    UserModule,
     BrowserModule,
-    AppRoutingModule
+    MaterialModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FlexLayoutModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
