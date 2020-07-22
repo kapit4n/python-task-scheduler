@@ -5,11 +5,11 @@
                 <mat-label>
                     Login
                 </mat-label>
-                <input matInput type="text" />
+                <input matInput formControlName="username" required type="text" class="form-control" />
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Password</mat-label>
-                <input type="password" />
+                <input matInput type="password" formControlName="password" required class="form-control" />
             </mat-form-field>
             <button mat-raised-button color="primary">Login</button></form>
     </mat-card-content>

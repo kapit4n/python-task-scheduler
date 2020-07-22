@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../shared/services/auth.service';
 import { Router } from '@angular/router';
 
+interface TokenRespI {
+  token: string;
+}
+
 @Component({
   selector: 'app-sig-in',
   templateUrl: './sig-in.component.html',
@@ -18,13 +22,22 @@ export class SigInComponent implements OnInit {
 
   ngOnInit(): void {
     this.signInForm = this.formBuilder.group({
-      login: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
 
   onSubmit() {
-    this.router.navigate(['home']);
+    const authValues = this.signInForm.value;
+    this.authService.login(authValues).subscribe((res: TokenRespI) => {
+      console.log(res);
+      // verify that we have a valid token
+      //this.router.navigate(['home']);
+
+      // this.authToken = res.token
+    }, error => {
+      console.error(error);
+    })
   }
 
 }

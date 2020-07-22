@@ -5,10 +5,22 @@ import { User } from '../models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseUrl } from '../base-url';
 
+interface AuthI {
+  password: string;
+  username: string;
+}
+
+interface TokenRespI {
+  token: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  login(authValues: AuthI): Observable<TokenRespI> {
+    return this.http.post<TokenRespI>(`http://localhost:8000/api/token/`, authValues);
+  }
 
   isAuthenticated = new BehaviorSubject<boolean>(false);
   constructor(
