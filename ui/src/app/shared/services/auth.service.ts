@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseUrl } from '../base-url';
 
 interface AuthI {
@@ -44,7 +44,7 @@ export class AuthService {
   }
 
   signOut() {
-    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     this.isAuthenticated.next(false);
     this.router.navigate(['/login']);
   }
@@ -57,5 +57,4 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  
 }

@@ -37,7 +37,12 @@ export class UsersService {
   }
 
   public list() {
-    return this.http.get('http://localhost:8000/users/');
+    return this.http.get('http://localhost:8000/api/users/');
   }
+
+  public me(): Observable<User> {
+    return this.http.get<User>('http://localhost:8000/api/me/');
+  }
+ 
 
 }

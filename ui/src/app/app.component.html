@@ -28,10 +28,11 @@
         <mat-icon>home</mat-icon>
         Home
     </button>
-    <button mat-menu-item routerLink="/signup">
+    <button mat-menu-item *ngIf="!isAuthenticated" routerLink="/signup">
         <mat-icon>person_add</mat-icon>
         Sign Up
     </button>
+
     <button mat-menu-item routerLink="/login" *ngIf="!isAuthenticated">
         <mat-icon>power_settings_new</mat-icon>
         Login

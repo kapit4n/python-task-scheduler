@@ -6,6 +6,14 @@ import { UsersService } from 'src/app/shared/services/users.service';
 
 interface TokenRespI {
   token: string;
+  access: string;
+}
+
+interface UserModel {
+  email: string;
+  first_name: string;
+  last_name: string;
+  username: string;
 }
 
 @Component({
@@ -35,9 +43,12 @@ export class SigInComponent implements OnInit {
 
       console.log(res);
       localStorage.setItem('token', res.access);
-      this.userSvc.list().subscribe(data => console.log(data), err => console.log(err));
+      this.userSvc.me().subscribe(data => {
+        this.authService.setUserData(data);
+        this.router.navigate(['home']);
+      }, err => console.log(err)
+      );
       // verify that we have a valid token
-      //this.router.navigate(['home']);
 
       // this.authToken = res.token
     }, error => {
