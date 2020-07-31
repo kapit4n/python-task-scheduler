@@ -1,6 +1,6 @@
 from django.urls import include, path
 from rest_framework import routers
-from .views import CreateUserView
+from .views import CreateUserView, UserList
 from . import views
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -26,4 +26,6 @@ urlpatterns = [
          views.PasswordTokenCheckAPI.as_view(), name='password-reset-confirm'),
     path('api/password-reset-complete',
          views.SetNewPasswordAPIView.as_view(), name='password-reset-complete'),
+    path('api/users/', UserList.as_view()),
+
 ]

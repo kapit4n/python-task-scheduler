@@ -25,6 +25,8 @@ class ResetPasswordEmailRequestSerializer(serializers.Serializer):
     class Meta:
         fields = ['email']
 
+class UserSerializerWithToken(serializers.ModelSerializer):
+    pass
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     password = serializers.CharField(write_only=True)
