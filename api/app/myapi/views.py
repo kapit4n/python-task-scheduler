@@ -4,10 +4,13 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework import permissions
 from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
+import logging
 
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.generics import GenericAPIView, ListAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveAPIView
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.authtoken.models import Token
 
 
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
@@ -31,6 +34,8 @@ from django.contrib.auth import get_user_model
 UserModel = get_user_model()
 
 # Create your views here.
+
+logger = logging.getLogger(__name__)
 
 
 class TaskViewSet(ModelViewSet):
@@ -72,6 +77,16 @@ class CreateUserView(CreateModelMixin, GenericViewSet):
 class UserList(ListAPIView):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
+
+
+class UserInfo(RetrieveAPIView):
+    queryset = get_user_model().objects.all()
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, email=self.request.user)
+        return obj
 
 
 class PasswordTokenCheckAPI(GenericAPIView):

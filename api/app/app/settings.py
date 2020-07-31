@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    #'rest_framework.authtoken',
     'corsheaders',
 ]
 
@@ -138,5 +139,6 @@ EMAIL_HOST_USER = 'test@gmail.com'
 EMAIL_HOST_PASSWORD = 'testpassword'
 # https://myaccount.google.com/lesssecureapps?pli=1, enter to this url
 
-CORS_ORIGIN_ALLOW_ALL = True # If this is used then `CORS_ORIGIN_WHITELIST` will not have any effect
+# If this is used then `CORS_ORIGIN_WHITELIST` will not have any effect
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
