@@ -36,4 +36,8 @@ export class UsersService {
     return this.http.patch('http://localhost:8000/api/password-reset-complete', passwordInfo)
   }
 
+  public list() {
+    return this.http.get('http://localhost:8000/users/');
+  }
+
 }

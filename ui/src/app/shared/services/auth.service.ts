@@ -52,4 +52,10 @@ export class AuthService {
   setUserData(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
   }
+
+  getToken(): string {
+    return localStorage.getItem('token');
+  }
+
+  
 }
