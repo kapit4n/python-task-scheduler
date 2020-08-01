@@ -1,7 +1,17 @@
 from .models import Task
-from .serializers import TaskSerializer, UserSerializer, ResetPasswordEmailRequestSerializer, SetNewPasswordSerializer
+from .serializers import TaskSerializer, UserSerializerWithToken, UserSerializer, ResetPasswordEmailRequestSerializer, SetNewPasswordSerializer
 from django.shortcuts import render
-from rest_framework import viewsets, generics, status
+from rest_framework import status
+from rest_framework import permissions
+from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
+import logging
+
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveAPIView
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.authtoken.models import Token
+
 
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
@@ -25,13 +35,15 @@ UserModel = get_user_model()
 
 # Create your views here.
 
+logger = logging.getLogger(__name__)
 
-class TaskViewSet(viewsets.ModelViewSet):
+
+class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all().order_by('id')
     serializer_class = TaskSerializer
 
 
-class RequestPasswordResetEmail(generics.GenericAPIView):
+class RequestPasswordResetEmail(GenericAPIView):
     serializer_class = ResetPasswordEmailRequestSerializer
 
     def post(self, request):
@@ -48,7 +60,8 @@ class RequestPasswordResetEmail(generics.GenericAPIView):
             relativeLink = reverse(
                 'password-reset-confirm', kwargs={'uidb64': uidb64, 'token': token}
             )
-            absurl = 'http://localhost:4200/reset-password-complete?url=http://' + current_site + relativeLink
+            absurl = 'http://localhost:4200/reset-password-complete?url=http://' + \
+                current_site + relativeLink
             email_body = 'Hello use this link below to reset your password \n' + absurl
             data = {'email_body': email_body, 'to_email': user.email,
                     'email_subject': 'Reset your password'}
@@ -61,7 +74,22 @@ class CreateUserView(CreateModelMixin, GenericViewSet):
     serializer_class = UserSerializer
 
 
-class PasswordTokenCheckAPI(generics.GenericAPIView):
+class UserList(ListAPIView):
+    queryset = get_user_model().objects.all()
+    serializer_class = UserSerializer
+
+
+class UserInfo(RetrieveAPIView):
+    queryset = get_user_model().objects.all()
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, email=self.request.user)
+        return obj
+
+
+class PasswordTokenCheckAPI(GenericAPIView):
     serializer_class = SetNewPasswordSerializer
 
     def get(self, request, uidb64, token):
@@ -79,7 +107,7 @@ class PasswordTokenCheckAPI(generics.GenericAPIView):
                 return Response({'error': 'Token is not valid, please request a new one'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
-class SetNewPasswordAPIView(generics.GenericAPIView):
+class SetNewPasswordAPIView(GenericAPIView):
     serializer_class = SetNewPasswordSerializer
 
     def patch(self, request):

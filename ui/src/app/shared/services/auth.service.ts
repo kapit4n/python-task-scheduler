@@ -2,13 +2,25 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { BaseUrl } from '../base-url';
+
+interface AuthI {
+  password: string;
+  username: string;
+}
+
+interface TokenRespI {
+  token: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  login(authValues: AuthI): Observable<TokenRespI> {
+    return this.http.post<TokenRespI>(`http://localhost:8000/api/token/`, authValues);
+  }
 
   isAuthenticated = new BehaviorSubject<boolean>(false);
   constructor(
@@ -32,7 +44,7 @@ export class AuthService {
   }
 
   signOut() {
-    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     this.isAuthenticated.next(false);
     this.router.navigate(['/login']);
   }
@@ -40,4 +52,9 @@ export class AuthService {
   setUserData(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
   }
+
+  getToken(): string {
+    return localStorage.getItem('token');
+  }
+
 }

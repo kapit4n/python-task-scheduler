@@ -25,12 +25,7 @@
                     </mat-error>
                 </div>
             </mat-form-field>
-            <mat-form-field class="full-width-input">
-                <input matInput placeholder="Username" formControlName="username" required autocomplete="off">
-                <mat-error>
-                    Username is required
-                </mat-error>
-            </mat-form-field>
+
             <mat-form-field class="full-width-input">
                 <input matInput type="password" placeholder="Password" formControlName="password" required minlength="8">
                 <div *ngIf="form.password.errors">
