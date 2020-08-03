@@ -14,10 +14,16 @@
             <mat-icon>exit_to_app</mat-icon>
             Logout
         </button>
-        <button mat-button routerLink="/signup">
+        <button mat-button *ngIf="!isAuthenticated" routerLink="/signup">
             <mat-icon>person_add</mat-icon>
             Sign Up
         </button>
+
+        <button mat-button *ngIf="isAuthenticated" routerLink="/profile">
+            <mat-icon>account_box</mat-icon>
+            {{userInfo.first_name}}
+        </button>
+
     </div>
     <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
         <mat-icon>menu</mat-icon>
