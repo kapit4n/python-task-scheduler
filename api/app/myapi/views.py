@@ -42,7 +42,6 @@ class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all().order_by('id')
     serializer_class = TaskSerializer
 
-
 class RequestPasswordResetEmail(GenericAPIView):
     serializer_class = ResetPasswordEmailRequestSerializer
 
@@ -72,7 +71,6 @@ class RequestPasswordResetEmail(GenericAPIView):
 class CreateUserView(CreateModelMixin, GenericViewSet):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
-
 
 class UserList(ListAPIView):
     queryset = get_user_model().objects.all()

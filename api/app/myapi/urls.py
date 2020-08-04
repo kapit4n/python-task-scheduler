@@ -9,7 +9,7 @@ from rest_framework_simplejwt.views import (
 )
 
 router = routers.DefaultRouter()
-router.register(r'tasks', views.TaskViewSet)
+router.register(r'api/tasks', views.TaskViewSet)
 router.register(r'users', CreateUserView)
 
 # Wire up our API using automatic URL routing.
