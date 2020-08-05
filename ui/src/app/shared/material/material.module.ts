@@ -18,6 +18,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatSlideToggleModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatDialogModule,
   ],
   exports: [
     CommonModule,
@@ -61,6 +63,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatSlideToggleModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatDialogModule,
   ]
 })
 export class MaterialModule { }
