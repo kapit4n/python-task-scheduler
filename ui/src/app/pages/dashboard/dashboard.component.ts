@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
     })
+
   }
 
   ngOnInit(): void {
