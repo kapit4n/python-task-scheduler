@@ -14,13 +14,15 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TasksComponent } from './svc/tasks/tasks.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CreateComponentDialog } from './task/create/create.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    TasksComponent
+    TasksComponent,
+    CreateComponentDialog
   ],
   imports: [
     UserModule,

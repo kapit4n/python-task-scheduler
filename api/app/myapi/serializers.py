@@ -16,8 +16,8 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Task
-        fields = ('id', 'description')
-
+        fields = ('id', 'description', 'status',
+                  'priority', 'time', 'estimated_time')
 
 class ResetPasswordEmailRequestSerializer(serializers.Serializer):
     email = serializers.EmailField(min_length=2)
@@ -25,14 +25,16 @@ class ResetPasswordEmailRequestSerializer(serializers.Serializer):
     class Meta:
         fields = ['email']
 
+
 class UserSerializerWithToken(serializers.ModelSerializer):
     pass
+
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     password = serializers.CharField(write_only=True)
 
     def create(self, validated_data):
-        ##validated_data['username']
+        # validated_data['username']
         user = UserModel.objects.create_user(
             username=validated_data['email'],
             password=validated_data['password'],

@@ -26,7 +26,10 @@ export class AuthService {
   constructor(
     private router: Router,
     private http: HttpClient,
-  ) { }
+  ) {
+    const authenticated = this.isLoggedIn;
+    this.isAuthenticated.next(authenticated);
+  }
 
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -45,6 +48,7 @@ export class AuthService {
 
   signOut() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.isAuthenticated.next(false);
     this.router.navigate(['/login']);
   }
