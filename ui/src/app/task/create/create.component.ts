@@ -35,12 +35,17 @@ export class CreateComponentDialog implements OnInit {
   onSubmit() {
     const taskInfo = this.createForm.value;
     this.taskSvc.create(taskInfo).subscribe(res => {
-      console.log(res);
+      console.log("Reload task list");
     });
     this.dialogRef.close();
   }
 
   onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  onCancel(): void {
+    this.createForm.reset();
     this.dialogRef.close();
   }
 
