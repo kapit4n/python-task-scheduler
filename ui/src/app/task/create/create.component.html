@@ -1,18 +1,18 @@
 <h2 mat-dialog-title>Create task</h2>
 <mat-dialog-content>
-  <form>
+  <form [formGroup]="createForm" id="create-task-form" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>
         Description
       </mat-label>
-      <input matInput />
+      <input matInput formControlName="description" />
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>
         status
       </mat-label>
-      <mat-select>
+      <mat-select formControlName="status">
         <mat-option *ngFor="let st of ['pending', 'progress', 'done']" [value]="st">
           {{st}}
         </mat-option>
@@ -23,18 +23,25 @@
       <mat-label>
         Priority
       </mat-label>
-      <input matInput type="number" />
+      <input matInput type="number" formControlName="priority" />
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>
         Estimated Time
       </mat-label>
-      <input matInput type="time" />
+      <input matInput type="number" formControlName="estimated_time" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        Time
+      </mat-label>
+      <input matInput type="number" formControlName="time" />
     </mat-form-field>
   </form>
   <div>
-    <button mat-raised-button color="primary">Save</button>
-    <button mat-raised-button color="secondary">Cancel</button>
+    <button mat-raised-button color="primary" form="create-task-form" type="submit">Start Later</button>
+    <button mat-raised-button color="secondary" (click)="onCancel()">Cancel</button>
   </div>
 </mat-dialog-content>
