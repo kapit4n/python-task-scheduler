@@ -46,7 +46,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = UserModel
-        fields = ('password', 'email', 'username', 'first_name', 'last_name',)
+        fields = ('email','password','first_name', 'last_name',)
 
 
 class SetNewPasswordSerializer(serializers.Serializer):
