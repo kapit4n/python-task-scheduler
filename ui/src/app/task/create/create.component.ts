@@ -27,8 +27,8 @@ export class CreateComponentDialog implements OnInit {
       description: ['', { validators: [Validators.required] }],
       status: [''],
       priority: [],
-      estimated_time: [''],
-      time: ['']
+      estimated_time: [0],
+      time: [0]
     });
   }
 
