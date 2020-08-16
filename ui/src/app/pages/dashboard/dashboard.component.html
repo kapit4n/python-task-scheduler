@@ -4,25 +4,20 @@
 </div>
 <table style="width:100%; padding: 5rem;">
     <tr>
-        <th>Description</th>
-        <th>Start Time</th>
-        <th>End Time/Paused</th>
-        <th>Status</th>
-        <th>Total</th>
+        <th style="text-align:center">Description</th>
+        <th style="text-align:center">Start Time</th>
+        <th style="text-align:center">End Time/Paused</th>
+        <th style="text-align:center">Status</th>
+        <th style="text-align:center">Total</th>
+        <th style="text-align:center">Action</th>
     </tr>
-    <tr>
-        <td>Task 1</td>
-        <td>8AM</td>
-        <td>9AM</td>
-        <td>In Progress</td>
-        <td>1h</td>
-    </tr>
-    <tr>
-        <td>Task 2</td>
-        <td>10AM</td>
-        <td>12AM</td>
-        <td>Done</td>
-        <td>2h</td>
+    <tr  *ngFor="let task of tasks">
+        <td style="text-align:center">{{task.description}}</td>
+        <td style="text-align:center"></td>
+        <td style="text-align:center"></td>
+        <td style="text-align:center">{{task.status}}</td>
+        <td style="text-align:center">1h</td>
+        <td style="text-align:center"><a href="">Start</a></td>
     </tr>
     <footer style="padding: 1rem 0;">total worked: 3hours</footer>
 </table>

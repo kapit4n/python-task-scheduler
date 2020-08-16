@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Task } from '../../shared/models/task'
+import { TasksService } from 'src/app/shared/services/tasks.service';
 
 import { CreateComponentDialog } from '../../task/create/create.component';
 
@@ -9,9 +11,10 @@ import { CreateComponentDialog } from '../../task/create/create.component';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor(public dialog: MatDialog) {
-
+  tasks:Task[] = []
+  constructor(public dialog: MatDialog,
+    private _tastsService: TasksService
+    ) {    
   }
 
   openCreate() {
@@ -23,6 +26,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._tastsService.list()
+      .subscribe(tasks => {
+        this.tasks = tasks;
+      });
   }
 
 }

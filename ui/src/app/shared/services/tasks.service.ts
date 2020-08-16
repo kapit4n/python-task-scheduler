@@ -16,4 +16,7 @@ export class TasksService {
   public create(taskInfo: Task) {
     return this.http.post('http://localhost:8000/api/tasks/', taskInfo);
   }
+  public list() {
+    return this.http.get<Task[]>('http://localhost:8000/api/tasks/');
+  }
 }

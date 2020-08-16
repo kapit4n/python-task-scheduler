@@ -15,7 +15,7 @@ export class AppComponent {
   constructor(
     private authService: AuthService, private userSvc: UsersService
   ) {
-    this.userInfo = { email: "", password: '', first_name: '', last_name: '', username: '' };
+    this.userInfo = { email: "", password: '', first_name: '', last_name: ''};
 
     this.userSvc.me().subscribe(data => {
       this.userInfo = data;
