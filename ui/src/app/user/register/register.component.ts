@@ -42,7 +42,6 @@ export class RegisterComponent implements OnInit {
           password: this.signUpForm.get('password').value,
           first_name: this.signUpForm.get('firstName').value,
           last_name: this.signUpForm.get('lastName').value,
-          username: this.signUpForm.get('email').value,
         };
         this.authService.signUp(user)
           .subscribe((resp: User) => {
