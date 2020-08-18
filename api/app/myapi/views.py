@@ -116,16 +116,17 @@ class TaskCurrentDetail(APIView):
         # then save status
         currentTask = self.get_object(pk)
         print(currentTask.status == 'progress')
+        curserializer = TaskSerializer(currentTask, data=request.data)
 
-        if currentTask.status == 'progress':
+        if request.data['status'] == 'progress':
             queryset2 = Task.objects.filter(status='progress')
             for item in queryset2:
-                print('item')
-                print(item)
-                item.status = 'pending'
-                item.save()
+                if item.pk is not pk:
+                    print('item')
+                    print(item)
+                    item.status = 'pending'
+                    item.save()
 
-        curserializer = TaskSerializer(currentTask, data=request.data)
 
         if curserializer.is_valid():
             curserializer.save()
