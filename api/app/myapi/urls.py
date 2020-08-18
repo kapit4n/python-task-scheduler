@@ -1,6 +1,6 @@
 from django.urls import include, path
 from rest_framework import routers
-from .views import CreateUserView, UserList, UserInfo
+from .views import CreateUserView, UserList, UserInfo, TaskCurrentList, TaskCurrentDetail
 from . import views
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -28,5 +28,6 @@ urlpatterns = [
          views.SetNewPasswordAPIView.as_view(), name='password-reset-complete'),
     path('api/users/', UserList.as_view()),
     path('api/me/', UserInfo.as_view()),
-
+    path('api/tasks-actions/current/', TaskCurrentList.as_view()),
+    path('api/tasks-actions/current/<int:pk>/', TaskCurrentDetail.as_view()),
 ]

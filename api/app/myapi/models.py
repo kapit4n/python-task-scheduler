@@ -5,7 +5,7 @@ from django.contrib.auth.models import (
 
 
 class Task(models.Model):
-    description = models.CharField(max_length=250)
+    description = models.CharField(max_length=250, default='')
     status = models.CharField(max_length=150, default='pending')
     priority = models.IntegerField(default=0)
     create_date = models.DateTimeField(default=datetime.now, blank=False)
@@ -14,4 +14,4 @@ class Task(models.Model):
     estimated_time = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.description
+        return self.description + ' ' + self.status + ' ' + str(self.pk)
