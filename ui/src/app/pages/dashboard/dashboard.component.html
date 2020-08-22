@@ -1,9 +1,8 @@
-<div style="padding: 5rem; display: flex; justify-content: flex-end;">
+<div style="padding: 0 5rem; display: flex; justify-content: flex-end;">
     <button mat-raised-button color="primary" style="margin: 1rem;">export</button>
     <button mat-raised-button color="primary" style="margin: 1rem;" (click)='openCreate()'>create</button>
 </div>
-
-<div style="width: 400px;">
+<div style="width: 400px; padding: 0 5rem;">
     <h1>{{current?.description}} on {{current?.status}} status</h1>
     <div style="display: flex; width: 350px; justify-content: space-between;">
         <h1 style="font-size: 3rem;">{{current?.time * 1000 | date:'H:mm:ss':'UTC'}}</h1>
@@ -24,12 +23,12 @@
 
 <table style="width:100%; padding: 5rem;">
     <tr>
-        <th style="text-align:center">Description</th>
-        <th style="text-align:center">Start Time</th>
-        <th style="text-align:center">End Time/Paused</th>
-        <th style="text-align:center">Status</th>
-        <th style="text-align:center">Total</th>
-        <th style="text-align:center">Action</th>
+        <th style="text-align:center" style="background-color: lightblue;height: 3rem;">Description</th>
+        <th style="text-align:center" style="background-color: lightblue;height: 3rem;">Start Time</th>
+        <th style="text-align:center" style="background-color: lightblue;height: 3rem;">End Time/Paused</th>
+        <th style="text-align:center" style="background-color: lightblue;height: 3rem;">Status</th>
+        <th style="text-align:center" style="background-color: lightblue;height: 3rem;">Total</th>
+        <th style="text-align:center" style="background-color: lightblue;height: 3rem;">Action</th>
     </tr>
     <tr *ngFor="let task of tasks">
         <td style="text-align:center" style="border-bottom: 1px solid black;">{{task.description}}</td>
