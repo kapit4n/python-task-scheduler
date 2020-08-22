@@ -4,7 +4,7 @@
 </div>
 
 <div style="width: 400px;">
-    <h1>{{current?.description}}</h1>
+    <h1>{{current?.description}} on {{current?.status}} status</h1>
     <div style="display: flex; width: 350px; justify-content: space-between;">
         <h1 style="font-size: 3rem;">{{current?.time * 1000 | date:'H:mm:ss':'UTC'}}</h1>
         <div *ngIf="current?.status === 'pending'"
@@ -32,12 +32,31 @@
         <th style="text-align:center">Action</th>
     </tr>
     <tr *ngFor="let task of tasks">
-        <td style="text-align:center">{{task.description}}</td>
-        <td style="text-align:center"></td>
-        <td style="text-align:center"></td>
-        <td style="text-align:center">{{task.status}}</td>
-        <td style="text-align:center">{{task?.time * 1000 | date:'H:mm:ss':'UTC'}}</td>
-        <td style="text-align:center"><button (click)="startTask(task)">Start</button></td>
+        <td style="text-align:center" style="border-bottom: 1px solid black;">{{task.description}}</td>
+        <td style="text-align:center" style="border-bottom: 1px solid black;"></td>
+        <td style="text-align:center" style="border-bottom: 1px solid black;"></td>
+        <td style="text-align:center" style="border-bottom: 1px solid black;">{{task.status}}</td>
+        <td style="text-align:center" style="border-bottom: 1px solid black;">
+            {{task?.time * 1000 | date:'H:mm:ss':'UTC'}}</td>
+        <td style="text-align:center" style="border-bottom: 1px solid black;">
+            <div style="display: flex; margin: 0.5rem 0;">
+                <div *ngIf="task?.status === 'pending'"
+                    style="background-color: blue; width: 30px; height: 30px; cursor: pointer;"
+                    (click)="startTask(task)">
+                    <i style="font-size: 1rem; margin: 5px; color: white;" class="fa fa-play"></i>
+                </div>
+                <div *ngIf="task?.status === 'progress'"
+                    style="background-color: skyblue; width: 30px; height: 30px; cursor: pointer;"
+                    (click)="continueTask(task)">
+                    <i style="font-size: 1rem; margin: 5px; color: white;" class="fa fa-pause"></i>
+                </div>
+                <div *ngIf="task?.status === 'progress' || task?.status === 'pending'"
+                    style="background-color: red; width: 30px; height: 30px;  cursor: pointer;"
+                    (click)="finishTask(task)">
+                    <i style="font-size: 1rem;  margin: 5px; color: white;" class="fa fa-stop"></i>
+                </div>
+            </div>
+        </td>
     </tr>
     <footer style="padding: 1rem 0;">total worked: {{totalTime * 1000 | date:'H:mm:ss':'UTC'}}</footer>
 </table>

@@ -51,6 +51,10 @@ export class DashboardComponent implements OnInit {
     this.current.status = 'progress';
   }
 
+  finishCurrent() {
+    this.current.status = 'finished';
+  }
+
   startTimer() {
     setInterval(() => {
       if (this.current && this.current.status == 'progress') {
@@ -64,6 +68,10 @@ export class DashboardComponent implements OnInit {
     }, 1000)
   }
 
+  continueTask(task) {
+    task.status = 'pending';
+  }
+
   startTask(task) {
     this.tasks.forEach(element => {
       if (element.status === 'progress') {
@@ -74,8 +82,7 @@ export class DashboardComponent implements OnInit {
     this.current = task;
   }
 
-  finishCurrent() {
-    this.current.status = 'finished';
+  finishTask(task) {
+    task.status = 'finished';
   }
-
 }
