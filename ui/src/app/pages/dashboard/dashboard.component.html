@@ -4,7 +4,7 @@
 </div>
 
 <div style="width: 400px;">
-    <h3>{{current?.description}}</h3>
+    <h1>{{current?.description}}</h1>
     <div style="display: flex; width: 350px; justify-content: space-between;">
         <h1 style="font-size: 3rem;">{{current?.time * 1000 | date:'H:mm:ss':'UTC'}}</h1>
         <div *ngIf="current?.status === 'pending'"
@@ -39,5 +39,5 @@
         <td style="text-align:center">{{task?.time * 1000 | date:'H:mm:ss':'UTC'}}</td>
         <td style="text-align:center"><button (click)="startTask(task)">Start</button></td>
     </tr>
-    <footer style="padding: 1rem 0;">total worked: 3hours</footer>
+    <footer style="padding: 1rem 0;">total worked: {{totalTime * 1000 | date:'H:mm:ss':'UTC'}}</footer>
 </table>

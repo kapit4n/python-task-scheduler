@@ -13,6 +13,7 @@ import { CreateComponentDialog } from '../../task/create/create.component';
 export class DashboardComponent implements OnInit {
   tasks: Task[] = []
   current: Task;
+  totalTime = 0;
   constructor(public dialog: MatDialog,
     private _tastsService: TasksService
   ) {
@@ -52,8 +53,13 @@ export class DashboardComponent implements OnInit {
 
   startTimer() {
     setInterval(() => {
-      if (this.current) {
+      if (this.current && this.current.status == 'progress') {
         this.current.time = this.current.time + 1;
+        let total = 0;
+        this.tasks.forEach(element => {
+          total = total + element.time;
+        });
+        this.totalTime = total;
       }
     }, 1000)
   }
