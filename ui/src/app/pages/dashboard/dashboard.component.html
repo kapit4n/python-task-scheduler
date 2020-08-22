@@ -40,17 +40,17 @@
         <td style="text-align:center" style="border-bottom: 1px solid black;">
             <div style="display: flex; margin: 0.5rem 0;">
                 <div *ngIf="task?.status === 'pending'"
-                    style="background-color: blue; width: 30px; height: 30px; cursor: pointer;"
+                    style="background-color: blue; width: 30px; height: 30px; cursor: pointer;   margin-left: 1rem;"
                     (click)="startTask(task)">
                     <i style="font-size: 1rem; margin: 5px; color: white;" class="fa fa-play"></i>
                 </div>
                 <div *ngIf="task?.status === 'progress'"
-                    style="background-color: skyblue; width: 30px; height: 30px; cursor: pointer;"
+                    style="background-color: skyblue; width: 30px; height: 30px; cursor: pointer; margin-left: 1rem;"
                     (click)="continueTask(task)">
                     <i style="font-size: 1rem; margin: 5px; color: white;" class="fa fa-pause"></i>
                 </div>
                 <div *ngIf="task?.status === 'progress' || task?.status === 'pending'"
-                    style="background-color: red; width: 30px; height: 30px;  cursor: pointer;"
+                    style="background-color: red; width: 30px; height: 30px;  cursor: pointer;   margin-left: 1rem;"
                     (click)="finishTask(task)">
                     <i style="font-size: 1rem;  margin: 5px; color: white;" class="fa fa-stop"></i>
                 </div>
