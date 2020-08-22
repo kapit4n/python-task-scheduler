@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Create task</h2>
 <mat-dialog-content>
-  <form [formGroup]="createForm" id="create-task-form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="createForm" id="create-task-form">
     <mat-form-field>
       <mat-label>
         Description
@@ -41,7 +41,10 @@
     </mat-form-field>
   </form>
   <div>
-    <button mat-raised-button color="primary" form="create-task-form" type="submit">Start Later</button>
+    <button mat-raised-button color="primary" (click)='onStartNow()'>
+      Start Now
+    </button>
+    <button mat-raised-button color="primary" (click)='onStartLater()'>Start Later</button>
     <button mat-raised-button color="secondary" (click)="onCancel()">Cancel</button>
   </div>
 </mat-dialog-content>

@@ -32,12 +32,32 @@ export class CreateComponentDialog implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit(startNow: boolean) {
     const taskInfo = this.createForm.value;
-    this.taskSvc.create(taskInfo).subscribe(res => {
-      console.log("Reload task list");
+
+    if (startNow) {
+      taskInfo.status = 'progress';
+    }
+
+    this.taskSvc.create(taskInfo).subscribe((res: Task) => {
+      console.log(res);
+      if (startNow) {
+        const taskLog = { task: res.id, start_date: new Date().toISOString(), status: 'running' };
+        this.taskSvc.createLog(taskLog).subscribe(tl => {
+          console.log(tl);
+        });
+      }
     });
     this.dialogRef.close();
+  }
+
+  onStartNow() {
+
+    this.onSubmit(true);
+  }
+
+  onStartLater() {
+    this.onSubmit(false);
   }
 
   onNoClick(): void {

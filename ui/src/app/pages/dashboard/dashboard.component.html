@@ -2,6 +2,26 @@
     <button mat-raised-button color="primary" style="margin: 1rem;">export</button>
     <button mat-raised-button color="primary" style="margin: 1rem;" (click)='openCreate()'>create</button>
 </div>
+
+<div style="width: 400px;">
+    <h3>{{current?.description}}</h3>
+    <div style="display: flex; width: 350px; justify-content: space-between;">
+        <h1 style="font-size: 3rem;">{{current?.time * 1000 | date:'H:mm:ss':'UTC'}}</h1>
+        <div *ngIf="current?.status === 'pending'"
+            style="background-color: blue; width: 60px; height: 60px; cursor: pointer;" (click)="startCurrent()">
+            <i style="font-size: 2rem; margin: 15px; color: white;" class="fa fa-play"></i>
+        </div>
+        <div *ngIf="current?.status === 'progress'"
+            style="background-color: skyblue; width: 60px; height: 60px; cursor: pointer;" (click)="continueCurrent()">
+            <i style="font-size: 2rem; margin: 15px; color: white;" class="fa fa-pause"></i>
+        </div>
+        <div *ngIf="current?.status === 'progress' || current?.status === 'pending'"
+            style="background-color: red; width: 60px; height: 60px;  cursor: pointer;" (click)="finishCurrent()">
+            <i style="font-size: 2rem;  margin: 15px; color: white;" class="fa fa-stop"></i>
+        </div>
+    </div>
+</div>
+
 <table style="width:100%; padding: 5rem;">
     <tr>
         <th style="text-align:center">Description</th>
@@ -11,13 +31,13 @@
         <th style="text-align:center">Total</th>
         <th style="text-align:center">Action</th>
     </tr>
-    <tr  *ngFor="let task of tasks">
+    <tr *ngFor="let task of tasks">
         <td style="text-align:center">{{task.description}}</td>
         <td style="text-align:center"></td>
         <td style="text-align:center"></td>
         <td style="text-align:center">{{task.status}}</td>
-        <td style="text-align:center">1h</td>
-        <td style="text-align:center"><a href="">Start</a></td>
+        <td style="text-align:center">{{task?.time * 1000 | date:'H:mm:ss':'UTC'}}</td>
+        <td style="text-align:center"><button (click)="startTask(task)">Start</button></td>
     </tr>
     <footer style="padding: 1rem 0;">total worked: 3hours</footer>
 </table>

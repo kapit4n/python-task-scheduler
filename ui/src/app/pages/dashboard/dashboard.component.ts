@@ -11,10 +11,12 @@ import { CreateComponentDialog } from '../../task/create/create.component';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  tasks:Task[] = []
+  tasks: Task[] = []
+  current: Task;
   constructor(public dialog: MatDialog,
     private _tastsService: TasksService
-    ) {    
+  ) {
+
   }
 
   openCreate() {
@@ -29,7 +31,45 @@ export class DashboardComponent implements OnInit {
     this._tastsService.list()
       .subscribe(tasks => {
         this.tasks = tasks;
+        // call endpoint the get the current stask
+        this.tasks.forEach(element => {
+          if (element.status === 'progress') {
+            this.current = element;
+          }
+        });
+        this.startTimer();
+
       });
+  }
+
+  continueCurrent() {
+    this.current.status = 'pending';
+  }
+
+  startCurrent() {
+    this.current.status = 'progress';
+  }
+
+  startTimer() {
+    setInterval(() => {
+      if (this.current) {
+        this.current.time = this.current.time + 1;
+      }
+    }, 1000)
+  }
+
+  startTask(task) {
+    this.tasks.forEach(element => {
+      if (element.status === 'progress') {
+        element.status = 'pending';
+      }
+    });
+    task.status = 'progress';
+    this.current = task;
+  }
+
+  finishCurrent() {
+    this.current.status = 'finished';
   }
 
 }
