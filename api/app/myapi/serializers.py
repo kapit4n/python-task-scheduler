@@ -3,7 +3,7 @@ from rest_framework.exceptions import AuthenticationFailed
 from django.utils.encoding import force_str
 from rest_framework import serializers
 
-from .models import Task
+from .models import Task, TaskLog
 
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import get_user_model
@@ -18,6 +18,14 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
         model = Task
         fields = ('id', 'description', 'status',
                   'priority', 'time', 'estimated_time')
+
+class TaskLogSerializer(serializers.HyperlinkedModelSerializer):
+    
+    task = TaskSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = TaskLog
+        fields = ('id', 'status', 'task', 'start_date', 'end_date')
 
 class ResetPasswordEmailRequestSerializer(serializers.Serializer):
     email = serializers.EmailField(min_length=2)

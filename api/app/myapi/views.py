@@ -1,5 +1,5 @@
-from .models import Task
-from .serializers import TaskSerializer, UserSerializerWithToken, UserSerializer, ResetPasswordEmailRequestSerializer, SetNewPasswordSerializer
+from .models import Task, TaskLog
+from .serializers import TaskSerializer, TaskLogSerializer, UserSerializerWithToken, UserSerializer, ResetPasswordEmailRequestSerializer, SetNewPasswordSerializer
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework import permissions
@@ -8,8 +8,11 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 import logging
 
 from rest_framework.viewsets import ModelViewSet
+
 from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView
+
 from rest_framework.viewsets import ModelViewSet
+
 from rest_framework.authtoken.models import Token
 
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
@@ -42,6 +45,9 @@ class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all().order_by('id')
     serializer_class = TaskSerializer
 
+class TaskLogViewSet(ModelViewSet):
+    queryset = TaskLog.objects.all().order_by('id')
+    serializer_class = TaskLogSerializer
 
 class RequestPasswordResetEmail(GenericAPIView):
     serializer_class = ResetPasswordEmailRequestSerializer
@@ -127,12 +133,10 @@ class TaskCurrentDetail(APIView):
                     item.status = 'pending'
                     item.save()
 
-
         if curserializer.is_valid():
             curserializer.save()
             return Response(curserializer.data)
         return Response(curserializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 class PasswordTokenCheckAPI(GenericAPIView):
     serializer_class = SetNewPasswordSerializer

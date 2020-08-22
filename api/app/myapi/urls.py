@@ -11,6 +11,7 @@ from rest_framework_simplejwt.views import (
 router = routers.DefaultRouter()
 router.register(r'api/tasks', views.TaskViewSet)
 router.register(r'users', CreateUserView)
+router.register(r'user-logs', views.TaskLogViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
