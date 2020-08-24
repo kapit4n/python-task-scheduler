@@ -19,7 +19,7 @@ interface TokenRespI {
 })
 export class AuthService {
   login(authValues: AuthI): Observable<TokenRespI> {
-    return this.http.post<TokenRespI>(`http://localhost:8000/api/token/`, authValues);
+    return this.http.post<TokenRespI>(`${BaseUrl}/api/token/`, authValues);
   }
 
   isAuthenticated = new BehaviorSubject<boolean>(false);

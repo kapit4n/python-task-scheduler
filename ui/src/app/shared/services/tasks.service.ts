@@ -15,14 +15,14 @@ export class TasksService {
   ) { }
 
   public create(taskInfo: Task) {
-    return this.http.post('http://localhost:8000/api/tasks/', taskInfo);
+    return this.http.post(`${BaseUrl}/api/tasks/`, taskInfo);
   }
   
   public createLog(taskLogInfo: TaskLog) {
-    return this.http.post('http://localhost:8000/api/task-logs/', taskLogInfo);
+    return this.http.post(`${BaseUrl}/api/task-logs/`, taskLogInfo);
   }
 
   public list() {
-    return this.http.get<Task[]>('http://localhost:8000/api/tasks/');
+    return this.http.get<Task[]>(`${BaseUrl}/api/tasks/`);
   }
 }

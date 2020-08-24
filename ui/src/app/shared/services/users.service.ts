@@ -25,7 +25,7 @@ export class UsersService {
   ) { }
 
   public requestChangePasswordEmail(req: PasswordResetRequest) {
-    return this.http.post('http://localhost:8000/api/request-reset-email/', req);
+    return this.http.post(`${BaseUrl}/api/request-reset-email/`, req);
   }
 
   public changePasswordRequest(url: string) {
@@ -33,15 +33,15 @@ export class UsersService {
   }
 
   public changePasswordComplete(passwordInfo: PasswordCompleteReq) {
-    return this.http.patch('http://localhost:8000/api/password-reset-complete', passwordInfo)
+    return this.http.patch(`${BaseUrl}/api/password-reset-complete`, passwordInfo)
   }
 
   public list() {
-    return this.http.get('http://localhost:8000/api/users/');
+    return this.http.get(`${BaseUrl}/api/users/`);
   }
 
   public me(): Observable<User> {
-    return this.http.get<User>('http://localhost:8000/api/me/');
+    return this.http.get<User>(`${BaseUrl}/api/me/`);
   }
  
 
