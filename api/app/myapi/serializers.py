@@ -12,20 +12,22 @@ from django.utils.http import urlsafe_base64_decode
 UserModel = get_user_model()
 
 
-class TaskSerializer(serializers.HyperlinkedModelSerializer):
+class TaskSerializer(serializers.ModelSerializer):
+
+    logs = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Task
         fields = ('id', 'description', 'status',
-                  'priority', 'time', 'estimated_time')
+                  'priority', 'time', 'estimated_time', 'logs')
 
-class TaskLogSerializer(serializers.HyperlinkedModelSerializer):
-    
-    task = TaskSerializer(many=False, read_only=True)
+
+class TaskLogSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TaskLog
         fields = ('id', 'status', 'task', 'start_date', 'end_date')
+
 
 class ResetPasswordEmailRequestSerializer(serializers.Serializer):
     email = serializers.EmailField(min_length=2)
@@ -54,7 +56,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = UserModel
-        fields = ('email','password','first_name', 'last_name',)
+        fields = ('email', 'password', 'first_name', 'last_name',)
 
 
 class SetNewPasswordSerializer(serializers.Serializer):
