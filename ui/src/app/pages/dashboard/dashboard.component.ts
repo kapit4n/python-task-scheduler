@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   current: Task;
   totalTime = 0;
   constructor(public dialog: MatDialog,
-    private _tastsService: TasksService
+    private _tasksService: TasksService
   ) {
 
   }
@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._tastsService.list()
+    this._tasksService.list()
       .subscribe(tasks => {
         this.tasks = tasks;
         // call endpoint the get the current stask
@@ -45,14 +45,23 @@ export class DashboardComponent implements OnInit {
 
   continueCurrent() {
     this.current.status = 'pending';
+    this._tasksService.update(this.current.id, this.current).subscribe(result => {
+      console.log(result);
+    })
   }
 
   startCurrent() {
     this.current.status = 'progress';
+    this._tasksService.update(this.current.id, this.current).subscribe(result => {
+      console.log(result);
+    })
   }
 
   finishCurrent() {
     this.current.status = 'finished';
+    this._tasksService.update(this.current.id, this.current).subscribe(result => {
+      console.log(result);
+    })
   }
 
   startTimer() {
@@ -69,20 +78,39 @@ export class DashboardComponent implements OnInit {
   }
 
   continueTask(task) {
+    task.status = 'progress';
+    this._tasksService.update(task.id, task).subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  pauseTask(task) {
     task.status = 'pending';
+    this._tasksService.update(task.id, task).subscribe(result => {
+      console.log(result);
+    });
   }
 
   startTask(task) {
     this.tasks.forEach(element => {
       if (element.status === 'progress') {
         element.status = 'pending';
+        this._tasksService.update(element.id, element).subscribe(result => {
+          console.log(result);
+        });
       }
     });
     task.status = 'progress';
     this.current = task;
+    this._tasksService.update(task.id, task).subscribe(result => {
+      console.log(result);
+    });
   }
 
   finishTask(task) {
     task.status = 'finished';
+    this._tasksService.update(task.id, task).subscribe(result => {
+      console.log(result);
+    });
   }
 }

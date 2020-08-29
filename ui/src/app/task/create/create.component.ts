@@ -4,7 +4,6 @@ import { Task } from '../../shared/models/task'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TasksService } from 'src/app/shared/services/tasks.service';
 
-
 @Component({
   selector: 'app-create-dialog',
   templateUrl: './create.component.html',
@@ -40,7 +39,6 @@ export class CreateComponentDialog implements OnInit {
     }
 
     this.taskSvc.create(taskInfo).subscribe((res: Task) => {
-      console.log(res);
       if (startNow) {
         const taskLog = { task: res.id, start_date: new Date().toISOString(), status: 'running' };
         this.taskSvc.createLog(taskLog).subscribe(tl => {

@@ -46,7 +46,7 @@
                 </div>
                 <div *ngIf="task?.status === 'progress'"
                     style="background-color: skyblue; width: 30px; height: 30px; cursor: pointer; margin-left: 1rem;"
-                    (click)="continueTask(task)">
+                    (click)="pauseTask(task)">
                     <i style="font-size: 1rem; margin: 5px; color: white;" class="fa fa-pause"></i>
                 </div>
                 <div *ngIf="task?.status === 'progress' || task?.status === 'pending'"
