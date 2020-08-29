@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateComponentDialog);
     dialogRef.afterClosed().subscribe(result => {
       if (result.data.status === 'progress') {
+        this.current = result.data;
         const filteredtasks = this.tasks.filter(t => t.status === 'progress');
         if (filteredtasks.length > 0) {
           const rToUpdate = filteredtasks.map(fu => this._tasksService.update(fu.id, Object.assign(fu, { status: 'pending' })));
