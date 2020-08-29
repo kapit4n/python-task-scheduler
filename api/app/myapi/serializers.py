@@ -19,7 +19,7 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ('id', 'description', 'status',
-                  'priority', 'time', 'estimated_time', 'logs')
+                  'priority', 'time', 'estimated_time', 'create_date', 'logs')
 
 
 class TaskLogSerializer(serializers.ModelSerializer):
