@@ -40,13 +40,13 @@ export class CreateComponentDialog implements OnInit {
 
     this.taskSvc.create(taskInfo).subscribe((res: Task) => {
       if (startNow) {
-        const taskLog = { task: res.id, start_date: new Date().toISOString(), status: 'running' };
+        const taskLog = { task: res.id, start_date: new Date().toISOString(), status: 'progress' };
         this.taskSvc.createLog(taskLog).subscribe(tl => {
           console.log(tl);
+          this.dialogRef.close({ data: res });
         });
       }
     });
-    this.dialogRef.close();
   }
 
   onStartNow() {

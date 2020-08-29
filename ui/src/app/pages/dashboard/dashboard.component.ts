@@ -5,6 +5,8 @@ import { TasksService } from 'src/app/shared/services/tasks.service';
 
 import { CreateComponentDialog } from '../../task/create/create.component';
 
+import { forkJoin } from 'rxjs';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -23,24 +25,35 @@ export class DashboardComponent implements OnInit {
   openCreate() {
     const dialogRef = this.dialog.open(CreateComponentDialog);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if (result.data.status === 'progress') {
+        const filteredtasks = this.tasks.filter(t => t.status === 'progress');
+        if (filteredtasks.length > 0) {
+          const rToUpdate = filteredtasks.map(fu => this._tasksService.update(fu.id, Object.assign(fu, { status: 'pending' })));
+          forkJoin(rToUpdate).subscribe(dd => {
+            this.tasks.push(result.data);
+          })
+        } else {
+          this.tasks.push(result.data);
+        }
+      }
     })
-
   }
 
-  ngOnInit(): void {
+  reloadData() {
     this._tasksService.list()
       .subscribe(tasks => {
         this.tasks = tasks;
-        // call endpoint the get the current stask
         this.tasks.forEach(element => {
           if (element.status === 'progress') {
             this.current = element;
           }
         });
         this.startTimer();
-
       });
+  }
+
+  ngOnInit(): void {
+    this.reloadData();
   }
 
   continueCurrent() {

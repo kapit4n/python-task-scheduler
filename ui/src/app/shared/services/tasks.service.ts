@@ -42,6 +42,4 @@ export class TasksService {
     return this.http.delete<Task[]>(`${BaseUrl}/api/tasks/${id}`);
   }
 
-
-
 }
