@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Task } from '../models/task';
+import { Task, TaskPage } from '../models/task';
 import { TaskLog } from '../models/taskLog';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseUrl } from '../base-url';
@@ -35,7 +35,7 @@ export class TasksService {
 
     const todayDate = new Date().toISOString().split('T')[0];
 
-    return this.http.get<Task[]>(`${BaseUrl}/api/tasks/?create_date=${todayDate}`);
+    return this.http.get<TaskPage>(`${BaseUrl}/api/tasks/?create_date=${todayDate}`);
   }
 
   public remove(id) {

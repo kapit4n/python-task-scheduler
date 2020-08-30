@@ -21,7 +21,6 @@ export class DashboardComponent implements OnInit {
   ) {
 
   }
-
   openCreate() {
     const dialogRef = this.dialog.open(CreateComponentDialog);
     dialogRef.afterClosed().subscribe(result => {
@@ -43,7 +42,10 @@ export class DashboardComponent implements OnInit {
   reloadData() {
     this._tasksService.list()
       .subscribe(tasks => {
-        this.tasks = tasks;
+
+        console.log(tasks);
+
+        this.tasks = tasks.results
         this.tasks.forEach(element => {
           if (element.status === 'progress') {
             this.current = element;

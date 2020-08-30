@@ -6,3 +6,6 @@ export interface Task {
   time: number;
 }
 
+export interface TaskPage {
+  results: Array<Task>;
+}

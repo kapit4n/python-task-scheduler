@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Task } from '../../shared/models/task'
+import { TaskPage, Task } from '../../shared/models/task'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TasksService } from 'src/app/shared/services/tasks.service';
 
