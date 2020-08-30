@@ -37,6 +37,8 @@ from django_filters import rest_framework as filters
 
 from django_filters.rest_framework import DjangoFilterBackend
 
+from rest_framework.pagination import PageNumberPagination
+
 UserModel = get_user_model()
 
 # Create your views here.
@@ -52,11 +54,15 @@ class TaskFilter(filters.FilterSet):
         model: Task
         fields = ('status', 'create_date')
 
+class TaskPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_params = 'page_size'
 
 class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all().order_by('id')
     serializer_class = TaskSerializer
     filterset_class = TaskFilter
+    pagination_class = TaskPagination
 
 
 class TaskLogViewSet(ModelViewSet):
