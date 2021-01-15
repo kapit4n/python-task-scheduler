@@ -39,7 +39,7 @@ class UserSerializerWithToken(serializers.ModelSerializer):
     pass
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
     def create(self, validated_data):

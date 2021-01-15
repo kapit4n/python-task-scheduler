@@ -54,9 +54,11 @@ class TaskFilter(filters.FilterSet):
         model: Task
         fields = ('status', 'create_date')
 
+
 class TaskPagination(PageNumberPagination):
     page_size = 10
     page_size_query_params = 'page_size'
+
 
 class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all().order_by('id')
@@ -65,9 +67,15 @@ class TaskViewSet(ModelViewSet):
     pagination_class = TaskPagination
 
 
+class TaskLogPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_params = 'page_size'
+
+
 class TaskLogViewSet(ModelViewSet):
     queryset = TaskLog.objects.all().order_by('id')
     serializer_class = TaskLogSerializer
+    pagination_class = TaskLogPagination
 
 
 class RequestPasswordResetEmail(GenericAPIView):
@@ -96,7 +104,7 @@ class RequestPasswordResetEmail(GenericAPIView):
         return Response({'success': 'We have sent you a link to rest your password '}, status=status.HTTP_200_OK)
 
 
-class CreateUserView(CreateModelMixin, GenericViewSet):
+class CreateUserView(ModelViewSet):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
 
@@ -104,6 +112,9 @@ class CreateUserView(CreateModelMixin, GenericViewSet):
 class UserList(ListAPIView):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
+    paginate_by = 10
+    paginate_by_param = 'page_size'
+    max_paginate_by = 100
 
 
 class UserInfo(RetrieveAPIView):

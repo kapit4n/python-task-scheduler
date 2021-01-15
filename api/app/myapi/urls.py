@@ -10,7 +10,7 @@ from rest_framework_simplejwt.views import (
 
 router = routers.DefaultRouter()
 router.register(r'api/tasks', views.TaskViewSet)
-router.register(r'users', CreateUserView)
+router.register(r'api/users', CreateUserView)
 router.register(r'api/task-logs', views.TaskLogViewSet)
 
 # Wire up our API using automatic URL routing.
@@ -27,7 +27,7 @@ urlpatterns = [
          views.PasswordTokenCheckAPI.as_view(), name='password-reset-confirm'),
     path('api/password-reset-complete',
          views.SetNewPasswordAPIView.as_view(), name='password-reset-complete'),
-    path('api/users/', UserList.as_view()),
+    # path('api/users/', UserList.as_view()),
     path('api/me/', UserInfo.as_view()),
     path('api/tasks-actions/current/', TaskCurrentList.as_view()),
     path('api/tasks-actions/current/<int:pk>/', TaskCurrentDetail.as_view()),
