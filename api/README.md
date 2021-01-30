@@ -10,6 +10,13 @@ docker-compose up
 - `conda activate my_env`
 - `python manage.py runserver`
 
+## install dependencies
+- pip install djangorestframework-simplejwt
+- pip install django-cors-headers
+- pip install djangorestframework
+- pip install rest_framework
+- pip install django
+
 ## login
 ### Auth token
 - `curl -X POST -H "Content-Type: application/json" -d '{"username":"admin","password":"password123"}' http://localhost:8000/api/token/`
