@@ -8,14 +8,14 @@ docker-compose up
 ### with conda
 - `conda create --name my_env python=3`
 - `conda activate my_env`
+- cd app
 - `python manage.py runserver`
 
 ## install dependencies
+- pip install django
+- pip install djangorestframework
 - pip install djangorestframework-simplejwt
 - pip install django-cors-headers
-- pip install djangorestframework
-- pip install rest_framework
-- pip install django
 
 ## login
 ### Auth token
