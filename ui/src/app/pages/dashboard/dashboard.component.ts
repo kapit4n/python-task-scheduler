@@ -81,6 +81,11 @@ export class DashboardComponent implements OnInit {
     setInterval(() => {
       if (this.current && this.current.status == 'progress') {
         this.current.time = this.current.time + 1;
+        if (this.current.time % 5 === 0) {
+          this._tasksService.update(this.current.id, this.current).subscribe(result => {
+            console.log('Current task saved', result)
+          })
+        }
         let total = 0;
         this.tasks.forEach(element => {
           total = total + element.time;

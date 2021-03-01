@@ -23,7 +23,7 @@ export class TasksService {
   }
 
   public update(id: number, taskInfo: Task) {
-    const data = {status: taskInfo.status};
+    const data = {status: taskInfo.status, time: taskInfo.time};
     return this.http.patch<Task>(`${BaseUrl}/api/tasks/${id}/`, data, this.httpOptions);
   }
 
