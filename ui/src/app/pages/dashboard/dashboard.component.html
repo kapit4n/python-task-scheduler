@@ -30,7 +30,7 @@
         <th style="text-align:center" style="background-color: lightblue;height: 3rem;">Total</th>
         <th style="text-align:center" style="background-color: lightblue;height: 3rem;">Action</th>
     </tr>
-    <tr *ngFor="let task of tasks">
+    <tr *ngFor="let task of tasks" [ngStyle]="{'background-color': task.status == 'progress' ? 'lightgreen': 'transparent'}">
         <td style="text-align:center" style="border-bottom: 1px solid black;">{{task.description}}</td>
         <td style="text-align:center" style="border-bottom: 1px solid black;"></td>
         <td style="text-align:center" style="border-bottom: 1px solid black;"></td>

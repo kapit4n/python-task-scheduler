@@ -42,9 +42,6 @@ export class DashboardComponent implements OnInit {
   reloadData() {
     this._tasksService.list()
       .subscribe(tasks => {
-
-        console.log(tasks);
-
         this.tasks = tasks.results
         this.tasks.forEach(element => {
           if (element.status === 'progress') {
