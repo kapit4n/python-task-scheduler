@@ -9,5 +9,9 @@ class TaskLog(models.Model):
     end_date = models.DateTimeField(default=datetime.now, blank=False)
     task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='logs')
 
+    class Meta:
+        app_label = "myapi"
+
+
     def __str__(self):
         return self.status

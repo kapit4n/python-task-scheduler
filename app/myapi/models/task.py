@@ -10,5 +10,9 @@ class Task(models.Model):
     time = models.IntegerField(default=0)
     estimated_time = models.IntegerField(default=0)
 
+
+    class Meta:
+        app_label = "myapi"
+
     def __str__(self):
         return self.description + ' ' + self.status + ' ' + str(self.pk)
