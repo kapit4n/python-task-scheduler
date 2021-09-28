@@ -1,8 +1,5 @@
 from django.db import models
 from datetime import datetime
-from django.contrib.auth.models import (
-    AbstractBaseUser, BaseUserManager, PermissionsMixin)
-
 
 class Task(models.Model):
     description = models.CharField(max_length=250, default='')
@@ -15,13 +12,3 @@ class Task(models.Model):
 
     def __str__(self):
         return self.description + ' ' + self.status + ' ' + str(self.pk)
-
-
-class TaskLog(models.Model):
-    status = models.CharField(max_length=250, default='running')
-    start_date = models.DateTimeField(default=datetime.now, blank=False)
-    end_date = models.DateTimeField(default=datetime.now, blank=False)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='logs')
-
-    def __str__(self):
-        return self.status
